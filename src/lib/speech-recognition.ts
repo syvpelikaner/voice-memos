@@ -13,13 +13,28 @@ export class SpeechRecognitionManager {
   $transcript = signal("");
   $error = signal<string | null>(null);
 
-  constructor({
-    continuous = true,
-    interimResults = true,
-    lang = "en-US",
-  }: SpeechRecognitionOptions = {}) {
-    this.recognition = new (window.SpeechRecognition ??
-      window.webkitSpeechRecognition)();
+  constructor(
+    {
+      continuous = true,
+      interimResults = true,
+      lang = "en-US",
+    }: SpeechRecognitionOptions = {},
+    recognition?: SpeechRecognition
+  ) {
+    if (
+      !(
+        "SpeechRecognition" in globalThis ||
+        "webkitSpeechRecognition" in globalThis
+      ) &&
+      recognition === undefined
+    ) {
+      throw new Error("Speech recognition not supported");
+    }
+
+    this.recognition =
+      recognition ??
+      new (globalThis.SpeechRecognition ??
+        globalThis.webkitSpeechRecognition)();
     this.recognition.continuous = continuous;
     this.recognition.interimResults = interimResults;
     this.recognition.lang = lang;
@@ -77,8 +92,6 @@ export class SpeechRecognitionManager {
     this.$error(null);
   }
 }
-
-export const speechRecognitionManager = new SpeechRecognitionManager();
 
 function getTranscript(event: SpeechRecognitionEvent): string {
   return Array.from(event.results)

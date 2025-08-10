@@ -1,5 +1,4 @@
 import { NotebookPen } from "lucide-react";
-import { useEffect } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
 export interface MemoInputs {
