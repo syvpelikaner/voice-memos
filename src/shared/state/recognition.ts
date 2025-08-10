@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useSignalValue } from "react-alien-signals";
 
-import { speechRecognitionManager } from "../../lib/speech-recognition";
+import { speechRecognitionManager } from "../../lib/index";
 
 export const useSpeechRecognition = () => {
   const isListening = useSignalValue(speechRecognitionManager.$isListening);

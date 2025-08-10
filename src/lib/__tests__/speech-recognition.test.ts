@@ -7,7 +7,7 @@ import {
   vi,
   beforeEach,
 } from "vitest";
-//@ts-expect-error
+//@ts-expect-error some ts modules problems
 import { SpeechRecognition } from "corti";
 import { SpeechRecognitionManager } from "../speech-recognition";
 

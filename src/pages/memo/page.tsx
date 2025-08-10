@@ -33,7 +33,7 @@ export const MemoPage = () => {
         );
       }
     },
-    [data, updateMemo]
+    [data, updateMemo, resetRecognition]
   );
 
   return (

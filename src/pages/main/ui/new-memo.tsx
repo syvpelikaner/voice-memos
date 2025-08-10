@@ -34,7 +34,7 @@ export const NewMemo = () => {
         );
       }
     },
-    []
+    [resetRecognition, createMemo]
   );
 
   if (!isListening && transcript.length === 0) {
